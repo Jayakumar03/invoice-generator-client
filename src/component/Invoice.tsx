@@ -52,11 +52,14 @@ const Invoice: React.FC = () => {
   const submitProductData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post(`https://backend-invoice-jssd.onrender.com/api/v1/invoice/createinvoice`, {
-        items,
-        totalAmount,
-        userId,
-      })
+      .post(
+        `https://backend-invoice-jssd.onrender.com/api/v1/invoice/createinvoice`,
+        {
+          items,
+          totalAmount,
+          userId,
+        }
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -64,29 +67,39 @@ const Invoice: React.FC = () => {
           const invoiceId = data.invoice._id;
           console.log(invoiceId);
           axios
-            .get(`https://backend-invoice-jssd.onrender.com/api/v1/invoice/download/${invoiceId}`, {
-              responseType: "blob",
-            })
+            .get(
+              `https://backend-invoice-jssd.onrender.com/api/v1/invoice/download/${invoiceId}`,
+              {
+                responseType: "blob",
+              }
+            )
             .then((downloadResponse) => {
-              // Handle the download response here
               const pdfData = downloadResponse.data;
               const pdfURL = URL.createObjectURL(pdfData);
 
-              // Create a link element
               const link = document.createElement("a");
               link.href = pdfURL;
-              link.download = "invoice.pdf"; // Set the file name
-              document.body.appendChild(link); // Required for Firefox
+              link.download = "invoice.pdf";
+              document.body.appendChild(link);
               link.click();
-              document.body.removeChild(link); // Clean up
+              document.body.removeChild(link);
             })
             .catch((downloadError) => {
-              // Handle download errors here
               console.error(downloadError);
+              toast.info("Unable to download pdf, due to puppetter issue.", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Bounce,
+              });
             });
         } else {
-          // Handle the case where the invoice was not successfully created
-          toast.error("Invoice creation failed.", {
+          toast.error("Unable to download pdf, due to puppetter.", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -131,7 +144,7 @@ const Invoice: React.FC = () => {
             <tbody>
               {items.map((product, index) => (
                 <tr key={index}>
-                  <td className="border px-4 py-2">{product.name}</td>
+                  <td className="border px-4 py-2">{product.productName}</td>
                   <td className="border px-4 py-2">{product.price}</td>
                   <td className="border px-4 py-2">{product.quantity}</td>
                 </tr>
