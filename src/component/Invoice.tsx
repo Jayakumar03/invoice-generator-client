@@ -49,12 +49,10 @@ const Invoice: React.FC = () => {
     return total;
   };
 
-
-
   const submitProductData = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3000/api/v1/invoice/createinvoice`, {
+      .post(`https://backend-invoice-jssd.onrender.com/api/v1/invoice/createinvoice`, {
         items,
         totalAmount,
         userId,
@@ -66,10 +64,21 @@ const Invoice: React.FC = () => {
           const invoiceId = data.invoice._id;
           console.log(invoiceId);
           axios
-            .get(`http://localhost:3000/api/v1/invoice/download/${invoiceId}`)
+            .get(`https://backend-invoice-jssd.onrender.com/api/v1/invoice/download/${invoiceId}`, {
+              responseType: "blob",
+            })
             .then((downloadResponse) => {
               // Handle the download response here
-              console.log(downloadResponse);
+              const pdfData = downloadResponse.data;
+              const pdfURL = URL.createObjectURL(pdfData);
+
+              // Create a link element
+              const link = document.createElement("a");
+              link.href = pdfURL;
+              link.download = "invoice.pdf"; // Set the file name
+              document.body.appendChild(link); // Required for Firefox
+              link.click();
+              document.body.removeChild(link); // Clean up
             })
             .catch((downloadError) => {
               // Handle download errors here

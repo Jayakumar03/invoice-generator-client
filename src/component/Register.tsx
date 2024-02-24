@@ -29,7 +29,7 @@ const Register: React.FC = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post(`http://localhost:3000/api/v1/user/register`, formData)
+      .post(`https://backend-invoice-jssd.onrender.com/api/v1/user/register`, formData)
       .then((response) => {
         navigate("/");
       })
