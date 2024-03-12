@@ -19,7 +19,7 @@ To set up a new React + TypeScript project using Vite, follow these steps:
 
 1. **Install Node.js**: Ensure you have Node.js installed on your machine. You can download it from [here](https://nodejs.org/).
 
-2. **Create a new Vite project**: Open your terminal and run git clone command to download project [here](https://github.com/Jayakumar03/invoice-generator-client.git) and 
+2. **Create a new Vite project**: Open your terminal and run git clone command to download project `git clone https://github.com/Jayakumar03/invoice-generator-client.git ` and 
 `cd invoice-generator-client`
 
 3. **Install dependencies**: Navigate into your project directory and install the dependencies:`npm install`
