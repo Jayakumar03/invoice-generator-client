@@ -24,8 +24,28 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter an valid email id.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      return;
+    }
     axios
-      .post(`https://backend-invoice-jssd.onrender.com/api/v1/user/login`, formData)
+      .post(
+        `https://backend-invoice-jssd.onrender.com/api/v1/user/login`,
+        formData
+      )
       .then((response) => {
         navigate("/invoice");
       })
@@ -97,7 +117,10 @@ const Login: React.FC = () => {
           >
             Sign In
           </button>
-          <Link className="text-slate-700 underline underline-offset-1" to="/register">
+          <Link
+            className="text-slate-700 underline underline-offset-1"
+            to="/register"
+          >
             Register
           </Link>
         </div>
