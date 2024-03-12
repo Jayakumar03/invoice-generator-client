@@ -7,7 +7,7 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 type Product = {
-  name: string;
+  productName: string;
   price: number;
   quantity: number;
 };

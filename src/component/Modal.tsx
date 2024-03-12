@@ -4,11 +4,7 @@ import React, { useState } from "react";
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onAddProduct: (product: {
-    productname: string;
-    price: number;
-    quantity: number;
-  }) => void;
+  onAddProduct: (product:Product) => void;
 };
 
 type Product = {
