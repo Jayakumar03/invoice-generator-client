@@ -5,7 +5,7 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   onAddProduct: (product: {
-    name: string;
+    productname: string;
     price: number;
     quantity: number;
   }) => void;
