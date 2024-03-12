@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Heading from "./Heading";
 
 type RegisterFormData = {
   name: string;
@@ -29,7 +30,10 @@ const Register: React.FC = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post(`https://backend-invoice-jssd.onrender.com/api/v1/user/register`, formData)
+      .post(
+        `https://backend-invoice-jssd.onrender.com/api/v1/user/register`,
+        formData
+      )
       .then((response) => {
         navigate("/");
       })
@@ -137,7 +141,9 @@ const Register: React.FC = () => {
           >
             Register
           </button>
-          <Link className="text-slate-700 underline underline-offset-1" to="/">Login</Link>
+          <Link className="text-slate-700 underline underline-offset-1" to="/">
+            Login
+          </Link>
         </div>
       </form>
 
